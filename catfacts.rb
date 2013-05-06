@@ -18,7 +18,7 @@ class CatFacts
     puts 'What is their name?'
     name = gets.chomp
 
-    greeting = GoogleText::Message.new(:text => "Hello #{name}, thanks for signing up to CatFacts! You will receive a free cat fact every hour!", :to => number)
+    greeting = GoogleText::Message.new(:text => "Hello #{name}, thanks for signing up to CatFacts! You will receive a free cat fact every 10 mins! Text 'Cat' to stop receiving CatFacts!", :to => number)
     greeting.send
 
     loop do
