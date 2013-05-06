@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'google_text'
 require 'highline/import'
+require 'timeout'
 
 class CatFacts
 
@@ -18,16 +19,16 @@ class CatFacts
     puts 'What is their name?'
     name = gets.chomp
 
-    greeting = GoogleText::Message.new(:text => "Hello #{name}, thanks for signing up to CatFacts! You will receive a free cat fact every 10 mins! Text 'Cat' to stop receiving CatFacts!", :to => number)
+    greeting = GoogleText::Message.new(:text => "Hello #{name}, thanks for signing up to CatFacts! You will receive a free cat fact every 10 secs! Text 'Cat' to stop receiving CatFacts!", :to => number)
     greeting.send
 
-    loop do
+    6.times do
       file = File.read('catfacts').split(/\n/)
       fact = file[Random.rand(file.size)][0..-2]
       message = GoogleText::Message.new(:text => fact, :to => number)
       message.send
       puts "Sent This Cat Fact: #{fact}"
-      sleep(3600)
+      sleep(10)
     end
   end
 
